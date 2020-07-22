@@ -4,8 +4,23 @@ const inputText = document.querySelector(".todo__input-text");
 const tasksListField = document.querySelector(".todo__list");
 
 
-
 let tasksList = [];
+
+if (localStorage.getItem('tasks')) {
+    tasksList = parseTasks();
+    loadTasks();
+} 
+
+
+function parseTasks() { 
+    return JSON.parse(localStorage.getItem('tasks'));
+}
+
+function loadTasks() {
+    parseTasks().forEach(task => {
+        generateHtmlTask(task);
+    });
+}
 
 
 function generateTask() { 
@@ -19,24 +34,36 @@ function generateTask() {
     tasksList.push(task);
 
     localStorage.setItem('tasks', JSON.stringify(tasksList));
-    addTask();
+
+    let lastTask = tasksList[tasksList.length - 1];
+    generateHtmlTask(lastTask);
 
 }
 
-function addTask() {
+function generateHtmlTask(task) {
+    let taskHtml = 
+    `<li class="todo__item"> 
+        <p class="todo__task">${task.todo}</p> 
+        <div>
+            <input class="todo__delete" type="button" value="delete">
+            <input class="todo__edit" type="button" value="edit">
+        </div>
+    </li>`;
+    addTask(taskHtml);
+}
 
-    let tasksArr = JSON.parse(localStorage.getItem('tasks'));
-    let task = tasksArr[tasksArr.length - 1];
+function addTask(taskHtml) {
 
-    tasksListField.innerHTML += `<li> ${task.todo} </li>`; 
-    
-
+    tasksListField.innerHTML += taskHtml; 
+    inputText.focus();
     clearInputText();
 }
 
 function clearInputText() {
     inputText.value = '';
 }
+
+
 
 
 
@@ -49,4 +76,5 @@ addBtn.onclick = function () {
 inputText.onkeypress = function (e) {
     e.key == 'Enter' ? generateTask() : null; 
 }
+
 

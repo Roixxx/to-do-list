@@ -17,6 +17,18 @@
         border: 1px solid green; //del
     }
 
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    &__task {
+        font-size: 20px;
+        padding: 5px 0;
+    }
+
+
     &__list {
         height: 100%;            //del
     }

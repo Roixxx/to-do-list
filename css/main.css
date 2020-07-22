@@ -15,6 +15,17 @@
   border: 1px solid green;
 }
 
+.todo__item {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.todo__task {
+  font-size: 20px;
+  padding: 5px 0;
+}
+
 .todo__list {
   height: 100%;
 }
