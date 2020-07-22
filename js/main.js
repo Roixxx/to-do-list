@@ -4,6 +4,7 @@ const inputText = document.querySelector(".todo__input-text");
 const tasksListField = document.querySelector(".todo__list");
 
 
+
 let tasksList = [];
 
 if (localStorage.getItem('tasks')) {
@@ -29,6 +30,7 @@ function generateTask() {
         todo: inputText.value,
         date: 1703,
         checked: false,
+        taskId: tasksList.length,
     }
 
     tasksList.push(task);
@@ -42,10 +44,10 @@ function generateTask() {
 
 function generateHtmlTask(task) {
     let taskHtml = 
-    `<li class="todo__item"> 
+    `<li class="todo__item" data-taskId="${task.taskId}"> 
         <p class="todo__task">${task.todo}</p> 
         <div>
-            <input class="todo__delete" type="button" value="delete">
+            <input class="todo__delete" onclick="delTask(this)" type="button" value="delete">
             <input class="todo__edit" type="button" value="edit">
         </div>
     </li>`;
@@ -57,6 +59,17 @@ function addTask(taskHtml) {
     tasksListField.innerHTML += taskHtml; 
     inputText.focus();
     clearInputText();
+}
+
+function delTask(target) {
+    target = target.parentNode.parentNode;
+    let targetId = target.dataset.taskid;
+
+    tasksList.splice(targetId, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasksList));
+
+    target.remove();
+    
 }
 
 function clearInputText() {
@@ -76,5 +89,6 @@ addBtn.onclick = function () {
 inputText.onkeypress = function (e) {
     e.key == 'Enter' ? generateTask() : null; 
 }
+
 
 

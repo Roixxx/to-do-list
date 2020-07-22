@@ -18,7 +18,7 @@
 .todo__item {
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  align-items: center;
 }
 
 .todo__task {
