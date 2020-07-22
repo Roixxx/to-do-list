@@ -48,7 +48,7 @@ function generateHtmlTask(task) {
         <p class="todo__task">${task.todo}</p> 
         <div>
             <input class="todo__delete" onclick="delTask(this)" type="button" value="delete">
-            <input class="todo__edit" type="button" value="edit">
+            <input class="todo__edit" onclick="editTask(this)" type="button" value="edit">
         </div>
     </li>`;
     addTask(taskHtml);
@@ -65,11 +65,17 @@ function delTask(target) {
     target = target.parentNode.parentNode;
     let targetId = target.dataset.taskid;
 
-    tasksList.splice(targetId, 1);
+    tasksList = tasksList.splice(targetId, 1);
     localStorage.setItem('tasks', JSON.stringify(tasksList));
 
     target.remove();
+}
+
+function editTask(target) {
+    target = target.parentNode.previousElementSibling;
     
+    target.setAttribute('contentEditable', 'true');
+    target.focus();
 }
 
 function clearInputText() {
