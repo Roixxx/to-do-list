@@ -57,12 +57,14 @@ function generateDate() {
 function generateHtmlTask(task) {
     let taskHtml = 
     `<li class="todo__item" data-taskId="${task.taskId}"> 
-        <input type="checkbox" onclick="completeTask(this)">
+        <input class="todo__checkbox" type="checkbox" onclick="completeTask(this)">
+
         <p class="todo__task">${task.todo}</p> 
         <div class="todo__btns-holder">
             <input class="todo__delete" onclick="delTask(this)" type="button" value="delete">
             <input class="todo__edit" onclick="editTask(this)" type="button" value="edit">
         </div>
+
         <p class="todo__date">${task.date}</p>
     </li>`;
     addTask(taskHtml);

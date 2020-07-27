@@ -1,20 +1,29 @@
+body {
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+}
+
 .container.todo {
     width: 100%;
     height: 100vh;
+    padding: 0 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .todo {
 
     &__box {
-        max-width: 400px;
+        max-width: 600px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        height: 400px;           //del
-        border: 1px solid green; //del
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        height: 700px;           //del
+        border: 2px solid black; //del
+
     }
 
     &__item {
@@ -22,6 +31,12 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &__item:nth-child(even) {
+        background-color: transparent;
     }
 
     &__task {
@@ -34,12 +49,45 @@
         height: 100%;            //del
     }
 
+    &__checkbox {
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+        
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     &__input-box {
         display: flex;
+        align-items: center;
     }
     
     &__input-text {
         width: 100%;
+        font-size: 20px;
+        height: 40px;
+        margin: 20px;
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid black;
+        
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__input-btn {
+        width: 80px;
+        height: 40px;
+        margin-right: 20px;
+        border-radius: 10px;
+        border: 1px solid black;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__btns-holder {
@@ -48,6 +96,8 @@
 
     &__date {
         position: absolute;
-        bottom: -10px;
+        bottom: 0px;
+        left: 50px;
+        font-size: 12px;
     }
 }
