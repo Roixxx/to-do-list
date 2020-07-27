@@ -37,3 +37,7 @@
 .todo__input-text {
   width: 100%;
 }
+
+.todo__btns-holder {
+  margin-left: auto;
+}
