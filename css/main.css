@@ -19,6 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .todo__task {
@@ -40,4 +41,9 @@
 
 .todo__btns-holder {
   margin-left: auto;
+}
+
+.todo__date {
+  position: absolute;
+  bottom: -10px;
 }

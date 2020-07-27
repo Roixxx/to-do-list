@@ -21,6 +21,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
     }
 
     &__task {
@@ -43,5 +44,10 @@
 
     &__btns-holder {
         margin-left: auto;
+    }
+
+    &__date {
+        position: absolute;
+        bottom: -10px;
     }
 }

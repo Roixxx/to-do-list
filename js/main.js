@@ -28,7 +28,7 @@ function generateTask() {
     
     let task = {
         todo: inputText.value,
-        date: 1703,
+        date: generateDate(),
         checked: false,
         taskId: tasksList.length,
     }
@@ -42,6 +42,18 @@ function generateTask() {
 
 }
 
+function generateDate() { 
+    let date = new Date();
+    let day = date.getDate();
+    let month = twoDigits( date.getMonth() + 1) ;
+
+    function twoDigits(num) {
+        return ('0' + num).slice(-2);
+    }
+
+    return day + '/' + month;
+}
+
 function generateHtmlTask(task) {
     let taskHtml = 
     `<li class="todo__item" data-taskId="${task.taskId}"> 
@@ -51,6 +63,7 @@ function generateHtmlTask(task) {
             <input class="todo__delete" onclick="delTask(this)" type="button" value="delete">
             <input class="todo__edit" onclick="editTask(this)" type="button" value="edit">
         </div>
+        <p class="todo__date">${task.date}</p>
     </li>`;
     addTask(taskHtml);
 }
@@ -72,7 +85,6 @@ function delTask(target) {
 
     tasksList.splice(targetId, 1);
     localStorage.setItem('tasks', JSON.stringify(tasksList));
-    console.log(tasksList)
 
     target.remove();
 }
