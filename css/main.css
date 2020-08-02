@@ -15,17 +15,16 @@ body {
 .todo__box {
   max-width: 600px;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
-  height: 700px;
   border: 2px solid black;
   overflow: hidden;
 }
 
 .todo__intro {
-  height: 230px;
-  background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+  height: 30%;
   position: relative;
 }
 
@@ -49,7 +48,7 @@ body {
 .todo__list::before {
   content: '';
   position: absolute;
-  top: -2px;
+  top: 0px;
   left: -2px;
   width: calc(100% + 4px);
   height: 100%;
@@ -90,6 +89,8 @@ body {
 }
 
 .todo__input-box {
+  max-height: 60px;
+  height: 20%;
   display: flex;
   align-items: center;
 }
@@ -98,7 +99,7 @@ body {
   width: 100%;
   font-size: 20px;
   height: 40px;
-  margin: 20px;
+  margin: 0 20px;
   padding: 5px;
   border-radius: 10px;
   border: 1px solid black;
