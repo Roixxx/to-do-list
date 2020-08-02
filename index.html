@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list by Roixxx</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -17,8 +18,8 @@
             <div class="todo__intro">
            
             </div>
-            <ul class="todo__list">
-
+            <ul class="todo__list" data-simplebar>
+               
             </ul>
             <div class="todo__input-box">
                 <input class="todo__input-text" maxlength="500" placeholder="add new" type="text">
@@ -27,7 +28,11 @@
 
         </div>
     </div>
-    <script src="js/main.js"></script>
+
+    <script defer async="false" type="text/javascript" src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+
+    
 </body>
 
 </html>

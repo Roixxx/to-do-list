@@ -46,6 +46,8 @@ body {
     &__list {
         height: 100%;            //del
         position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     &__list::before {

@@ -42,6 +42,8 @@ body {
 .todo__list {
   height: 100%;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .todo__list::before {

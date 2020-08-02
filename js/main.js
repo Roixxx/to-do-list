@@ -1,8 +1,7 @@
 
 const addBtn = document.querySelector(".todo__input-btn");
 const inputText = document.querySelector(".todo__input-text");
-const tasksListField = document.querySelector(".todo__list");
-
+let tasksListField = document.querySelector(".todo__list");
 
 
 let tasksList = [];
@@ -24,7 +23,9 @@ function loadTasks() {
 }
 
 
-function generateTask() { 
+function generateTask(isUserTask) { 
+
+    if (isUserTask) tasksListField = document.querySelector('.simplebar-content');
     
     let task = {
         todo: inputText.value,
@@ -71,6 +72,7 @@ function generateHtmlTask(task) {
 }
 
 function addTask(taskHtml) {
+    
 
     tasksListField.innerHTML += taskHtml; 
     inputText.focus();
@@ -103,17 +105,13 @@ function clearInputText() {
 }
 
 
-
-
-
 addBtn.onclick = function () {
     if (!inputText.value) return;
-    generateTask();
+    generateTask(true);
 }
 
-
 inputText.onkeypress = function (e) {
-    e.key == 'Enter' ? generateTask() : null; 
+    e.key == 'Enter' ? generateTask(true) : null; 
 }
 
 
