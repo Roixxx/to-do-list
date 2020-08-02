@@ -72,7 +72,6 @@ function generateHtmlTask(task) {
 }
 
 function addTask(taskHtml) {
-    
 
     tasksListField.innerHTML += taskHtml; 
     inputText.focus();
@@ -114,9 +113,3 @@ inputText.onkeypress = function (e) {
     e.key == 'Enter' ? generateTask(true) : null; 
 }
 
-
-// Scrollbar
-
-var Scrollbar = window.Scrollbar;
-
-Scrollbar.init(document.querySelector('.my-scrollbar'));
