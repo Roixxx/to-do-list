@@ -4,13 +4,16 @@ const inputText = document.querySelector(".todo__input-text");
 let tasksListField = document.querySelector(".todo__list");
 
 
+
 let tasksList = [];
 
 if (localStorage.getItem('tasks')) {
     tasksList = parseTasks();
     loadTasks();
+    new SimpleBar(document.querySelector('.todo__list'));
 } 
-
+const simpleBar = new SimpleBar(document.querySelector('.todo__list'));
+console.log(simpleBar)
 
 function parseTasks() { 
     return JSON.parse(localStorage.getItem('tasks'));
@@ -22,11 +25,8 @@ function loadTasks() {
     });
 }
 
-
 function generateTask(isUserTask) { 
 
-    if (isUserTask) tasksListField = document.querySelector('.simplebar-content');
-    
     let task = {
         todo: inputText.value,
         date: generateDate(),
@@ -106,10 +106,11 @@ function clearInputText() {
 
 addBtn.onclick = function () {
     if (!inputText.value) return;
-    generateTask(true);
+    generateTask();
 }
 
 inputText.onkeypress = function (e) {
-    e.key == 'Enter' ? generateTask(true) : null; 
+    e.key == 'Enter' ? generateTask() : null; 
 }
+
 
