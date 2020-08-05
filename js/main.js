@@ -99,6 +99,7 @@ function editTask(target) {
     
     target.setAttribute('contentEditable', 'true');
     target.focus();
+
 }
 
 function clearInputText() {
