@@ -11,9 +11,11 @@ if (localStorage.getItem('tasks')) {
     tasksList = parseTasks();
     loadTasks();
     new SimpleBar(document.querySelector('.todo__list'));
+    tasksListField = document.querySelector(".simplebar-content");
 } 
 const simpleBar = new SimpleBar(document.querySelector('.todo__list'));
-console.log(simpleBar)
+const containerScroll = document.querySelector('.simplebar-content-wrapper'); 
+
 
 function parseTasks() { 
     return JSON.parse(localStorage.getItem('tasks'));
@@ -103,14 +105,16 @@ function clearInputText() {
     inputText.value = '';
 }
 
-
-addBtn.onclick = function () {
+function validateTaskAdding(isTrueKey) { 
     if (!inputText.value) return;
+    if (!isTrueKey) return;
+
     generateTask();
+    let scrollHeight = containerScroll.firstChild.clientHeight;
+    containerScroll.scrollTo({ top: scrollHeight, behavior: "smooth" });
 }
 
-inputText.onkeypress = function (e) {
-    e.key == 'Enter' ? generateTask() : null; 
-}
-
+addBtn.onclick = () => validateTaskAdding(true);
+    
+inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
