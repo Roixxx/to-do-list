@@ -119,3 +119,4 @@ addBtn.onclick = () => validateTaskAdding(true);
     
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
+//to do 1) пофиксить edit and delete funcs, сделать показ времени с помощью класса.
