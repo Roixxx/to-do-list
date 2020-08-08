@@ -100,12 +100,40 @@ function delTask(target) {
 }
 
 function editTask(target) {
+    tasksListField.addEventListener('click', (e) => {
+        e.stopPropagation();
+        alert('Save your changes first');
+        inputText.focus();
+    }, true);
+
     target = target.parentNode.previousElementSibling;
-    
-    inputText.value = target.textContent;
+    target.classList.add('task-editing');
+
     addTaskBtn.value = 'save';
-    inputText.focus();
+    addTaskBtn.setAttribute('onclick', 'saveEditedTask(true)');
+
+    inputText.value = target.textContent;
+    inputText.onkeypress = (e) => saveEditedTask(e.key == 'Enter');
+
+    inputText.focus();   
+}
+
+function saveEditedTask(isTrueKey) {
+
+    if (!isTrueKey) return;
+
+    let editedTask = tasksListField.querySelector('.task-editing');
+    let editedTaskId = editedTask.parentNode.dataset.taskid;
+
+    editedTask.textContent = inputText.value;
     
+    tasksList.forEach(task => {
+        if (task.taskId == editedTaskId)  {
+            task.todo = editedTask.textContent;
+            localStorage.setItem('tasks', JSON.stringify(tasksList));
+        }
+    });
+    window.location.reload();
 }
 
 function clearInputText() {
@@ -127,4 +155,3 @@ inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
 //to do 1) editTask, сделать показ времени с помощью класса.
 
-console.log(tasksList)
