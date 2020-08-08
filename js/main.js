@@ -64,8 +64,8 @@ function generateHtmlTask(task) {
 
         <p class="todo__task">${task.todo}</p> 
         <div class="todo__btns-holder">
-            <input class="todo__edit" onclick="editTask(this)" type="button" value="edit">
-            <input class="todo__delete" onclick="delTask(this)" type="button">
+            <input class="todo__edit" onclick="editTask(this)" type="button" title="edit">
+            <input class="todo__delete" onclick="delTask(this)" type="button" title="delete">
         </div>
 
         <p class="todo__date">${task.date}</p>
@@ -106,13 +106,13 @@ function editTask(target) {
         inputText.focus();
     }, true);
 
-    target = target.parentNode.previousElementSibling;
+    target = target.parentNode.parentNode;
     target.classList.add('task-editing');
-
+    
     addTaskBtn.value = 'save';
     addTaskBtn.setAttribute('onclick', 'saveEditedTask(true)');
 
-    inputText.value = target.textContent;
+    inputText.value = target.querySelector('.todo__task').textContent;
     inputText.onkeypress = (e) => saveEditedTask(e.key == 'Enter');
 
     inputText.focus();   
@@ -122,14 +122,11 @@ function saveEditedTask(isTrueKey) {
 
     if (!isTrueKey) return;
 
-    let editedTask = tasksListField.querySelector('.task-editing');
-    let editedTaskId = editedTask.parentNode.dataset.taskid;
-
-    editedTask.textContent = inputText.value;
-    
+    let editedTaskId = tasksListField.querySelector('.task-editing').dataset.taskid;
+   
     tasksList.forEach(task => {
         if (task.taskId == editedTaskId)  {
-            task.todo = editedTask.textContent;
+            task.todo = inputText.value;
             localStorage.setItem('tasks', JSON.stringify(tasksList));
         }
     });

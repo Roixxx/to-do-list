@@ -88,19 +88,22 @@ body {
   cursor: pointer;
 }
 
-.todo__delete {
+.todo__delete, .todo__edit {
   background: url("../img/delete.png") no-repeat;
   width: 26px;
   height: 26px;
   border: none;
   background-size: cover;
   cursor: pointer;
-  border-radius: 50%;
   transition: backgorund-color 0.3s;
 }
 
-.todo__delete:hover {
+.todo__delete:hover, .todo__edit:hover {
   background-color: #c8c8c8;
+}
+
+.todo__edit {
+  background-image: url("../img/edit.png");
 }
 
 .todo__input-box {
@@ -146,4 +149,8 @@ body {
   bottom: 0px;
   left: 50px;
   font-size: 12px;
+}
+
+.todo .task-editing {
+  border: 2px dotted black;
 }

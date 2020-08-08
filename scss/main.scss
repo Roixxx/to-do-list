@@ -95,20 +95,24 @@ body {
         }
     }
 
-    &__delete {
+    &__delete,
+    &__edit {
         background: url('../img/delete.png') no-repeat;
         width: 26px;
         height: 26px;
         border: none;
         background-size: cover;
         cursor: pointer;
-        border-radius: 50%;
+        //border-radius: 50%;
         transition: backgorund-color 0.3s;
 
         &:hover {
             background-color: #c8c8c8;
-
         }
+    }
+
+    &__edit {
+        background-image: url('../img/edit.png');
     }
 
     &__input-box {
@@ -157,6 +161,6 @@ body {
     }
 
     .task-editing {
-        
+        border: 2px dotted black;
     }
 }
