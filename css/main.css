@@ -121,6 +121,7 @@ body {
 
 .todo__input-text:focus {
   outline: none;
+  border: 2px solid #a48a8a;
 }
 
 .todo__input-btn {

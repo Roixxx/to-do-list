@@ -1,5 +1,5 @@
 
-const addBtn = document.querySelector(".todo__input-btn");
+const addTaskBtn = document.querySelector(".todo__input-btn");
 const inputText = document.querySelector(".todo__input-text");
 let tasksListField = document.querySelector(".todo__list");
 
@@ -102,8 +102,10 @@ function delTask(target) {
 function editTask(target) {
     target = target.parentNode.previousElementSibling;
     
-    target.setAttribute('contentEditable', 'true');
-    target.focus();
+    inputText.value = target.textContent;
+    addTaskBtn.value = 'save';
+    inputText.focus();
+    
 }
 
 function clearInputText() {
@@ -119,13 +121,10 @@ function validateTaskAdding(isTrueKey) {
     containerScroll.scrollTo({ top: scrollHeight, behavior: "smooth" });
 }
 
-addBtn.onclick = () => validateTaskAdding(true);
+addTaskBtn.onclick = () => validateTaskAdding(true);
     
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
-//to do 1) пофиксить edit and delete funcs, сделать показ времени с помощью класса.
-
-
-
+//to do 1) editTask, сделать показ времени с помощью класса.
 
 console.log(tasksList)
