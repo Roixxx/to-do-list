@@ -88,6 +88,21 @@ body {
   cursor: pointer;
 }
 
+.todo__delete {
+  background: url("../img/delete.png") no-repeat;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background-size: cover;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: backgorund-color 0.3s;
+}
+
+.todo__delete:hover {
+  background-color: #c8c8c8;
+}
+
 .todo__input-box {
   height: 60px;
   display: flex;
@@ -122,6 +137,7 @@ body {
 
 .todo__btns-holder {
   margin-left: auto;
+  display: flex;
 }
 
 .todo__date {

@@ -64,8 +64,8 @@ function generateHtmlTask(task) {
 
         <p class="todo__task">${task.todo}</p> 
         <div class="todo__btns-holder">
-            <input class="todo__delete" onclick="delTask(this)" type="button" value="delete">
             <input class="todo__edit" onclick="editTask(this)" type="button" value="edit">
+            <input class="todo__delete" onclick="delTask(this)" type="button">
         </div>
 
         <p class="todo__date">${task.date}</p>
@@ -88,7 +88,12 @@ function delTask(target) {
     target = target.parentNode.parentNode;
     let targetId = target.dataset.taskid;
 
-    tasksList.splice(targetId, 1);
+    tasksList.forEach((task, id) => {
+        
+        if (task.taskId == targetId) {
+            tasksList.splice(id, 1)
+        }
+    });
     localStorage.setItem('tasks', JSON.stringify(tasksList));
 
     target.remove();
@@ -99,7 +104,6 @@ function editTask(target) {
     
     target.setAttribute('contentEditable', 'true');
     target.focus();
-
 }
 
 function clearInputText() {
@@ -120,3 +124,8 @@ addBtn.onclick = () => validateTaskAdding(true);
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
 //to do 1) пофиксить edit and delete funcs, сделать показ времени с помощью класса.
+
+
+
+
+console.log(tasksList)
