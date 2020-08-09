@@ -1,6 +1,7 @@
 
 const addTaskBtn = document.querySelector(".todo__input-btn");
 const inputText = document.querySelector(".todo__input-text");
+//const checkbox = document.querySelector('.todo__checkbox');
 let tasksListField = document.querySelector(".todo__list");
 
 
@@ -58,9 +59,17 @@ function generateDate() {
 }
 
 function generateHtmlTask(task) {
+    let itemClass = 'todo__item';
+    let isChecked = '';
+    
+    if (task.checked) {
+        itemClass = 'todo__item checked';
+        isChecked = 'checked';
+    }
+
     let taskHtml = 
-    `<li class="todo__item" data-taskId="${task.taskId}"> 
-        <input class="todo__checkbox" type="checkbox" onclick="completeTask(this)">
+    `<li class="${itemClass}" data-taskId="${task.taskId}"> 
+        <input class="todo__checkbox" type="checkbox" ${isChecked} onclick="completeTask(this)">
 
         <p class="todo__task">${task.todo}</p> 
         <div class="todo__btns-holder">
@@ -81,7 +90,17 @@ function addTask(taskHtml) {
 }
 
 function completeTask(task) {
-    return;
+    task = task.parentNode;
+    currentTaskId = task.dataset.taskid;
+
+    tasksList.forEach(task => {
+        if (task.taskId == currentTaskId)  {
+            task.checked = !task.checked;
+            localStorage.setItem('tasks', JSON.stringify(tasksList));
+        }
+    });
+
+    task.classList.toggle('checked');
 }
 
 function delTask(target) {
@@ -146,9 +165,12 @@ function validateTaskAdding(isTrueKey) {
     containerScroll.scrollTo({ top: scrollHeight, behavior: "smooth" });
 }
 
+
+
 addTaskBtn.onclick = () => validateTaskAdding(true);
     
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
-//to do 1) editTask, сделать показ времени с помощью класса.
+
+
 

@@ -70,6 +70,10 @@ body {
         position: relative;
         padding: 10px 20px;
         background-color: rgba(0, 0, 0, 0.05);
+
+        &.checked {
+            text-decoration: line-through;
+        }
     }
 
     &__item:first-child {
