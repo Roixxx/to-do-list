@@ -1,8 +1,10 @@
 
+const introDate = document.querySelector(".todo__intro-date");
 const addTaskBtn = document.querySelector(".todo__input-btn");
 const inputText = document.querySelector(".todo__input-text");
 //const checkbox = document.querySelector('.todo__checkbox');
 let tasksListField = document.querySelector(".todo__list");
+
 
 
 
@@ -11,6 +13,7 @@ let tasksList = [];
 if (localStorage.getItem('tasks')) {
     tasksList = parseTasks();
     loadTasks();
+    generateDate();
     new SimpleBar(document.querySelector('.todo__list'));
     tasksListField = document.querySelector(".simplebar-content");
 } 
@@ -28,7 +31,7 @@ function loadTasks() {
     });
 }
 
-function generateTask(isUserTask) { 
+function generateTask() { 
 
     let task = {
         todo: inputText.value,
@@ -49,12 +52,14 @@ function generateTask(isUserTask) {
 function generateDate() { 
     let date = new Date();
     let day = date.getDate();
-    let month = twoDigits( date.getMonth() + 1) ;
+    let month = twoDigits( date.getMonth() + 1);
+    let weekday = date.toLocaleDateString('en-us', {weekday: 'long'});
 
     function twoDigits(num) {
         return ('0' + num).slice(-2);
     }
 
+    introDate.textContent = `${day}.${month}, ${weekday}`;
     return day + '/' + month;
 }
 
