@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list by Roixxx</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
@@ -16,11 +16,15 @@
         <div class="todo__box">
 
             <div class="todo__intro">
-                <p class="todo__intro-date">01.01.2020, Sunday</p>
-                <p><span>0</span> tasks left</p>
-                <input type="button" value="All">
-                <input type="button" value="Active">
-                <input type="button" value="Completed">
+                <div class="todo__intro__info">
+                    <p class="todo__intro-date">01.01.2020, Sunday</p>
+                    <p><span class="todo__tasks-left">0</span> tasks left to do</p>
+                </div>
+                <div class="todo__intro-btns">
+                    <input class="todo__intro-btn active" onclick="switchMode(this)" type="button" value="All">
+                    <input class="todo__intro-btn" onclick="switchMode(this)" type="button" value="Active">
+                    <input class="todo__intro-btn" onclick="switchMode(this)" type="button" value="Completed">
+                </div>
             </div>
 
             <div class="todo__list-mask">

@@ -1,7 +1,9 @@
-
+const tasksLeft = document.querySelector('.todo__tasks-left');
 const introDate = document.querySelector(".todo__intro-date");
 const addTaskBtn = document.querySelector(".todo__input-btn");
 const inputText = document.querySelector(".todo__input-text");
+const todoList = document.querySelector(".todo__list");
+const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
 //const checkbox = document.querySelector('.todo__checkbox');
 let tasksListField = document.querySelector(".todo__list");
 
@@ -14,6 +16,7 @@ if (localStorage.getItem('tasks')) {
     tasksList = parseTasks();
     loadTasks();
     generateDate();
+    calcTasksLeft();
     new SimpleBar(document.querySelector('.todo__list'));
     tasksListField = document.querySelector(".simplebar-content");
 } 
@@ -47,6 +50,12 @@ function generateTask() {
     let lastTask = tasksList[tasksList.length - 1];
     generateHtmlTask(lastTask);
 
+}
+
+function calcTasksLeft() {
+    let left = 0;
+    tasksList.forEach( t => !t.checked ? left++ : null );
+    tasksLeft.textContent = left;
 }
 
 function generateDate() { 
@@ -92,6 +101,7 @@ function addTask(taskHtml) {
     tasksListField.innerHTML += taskHtml; 
     inputText.focus();
     clearInputText();
+    calcTasksLeft();
 }
 
 function completeTask(task) {
@@ -106,6 +116,7 @@ function completeTask(task) {
     });
 
     task.classList.toggle('checked');
+    calcTasksLeft();
 }
 
 function delTask(target) {
@@ -121,6 +132,7 @@ function delTask(target) {
     localStorage.setItem('tasks', JSON.stringify(tasksList));
 
     target.remove();
+    calcTasksLeft();
 }
 
 function editTask(target) {
@@ -159,6 +171,13 @@ function saveEditedTask(isTrueKey) {
 
 function clearInputText() {
     inputText.value = '';
+}
+
+function switchMode(btn) { 
+    todoList.classList = ('todo__list ' + btn.value.toLowerCase() + '-mode');
+
+    introBtns.forEach(btn => btn.classList = btn.classList[0]);
+    btn.classList.add('active');
 }
 
 function validateTaskAdding(isTrueKey) { 

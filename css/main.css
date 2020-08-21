@@ -1,5 +1,6 @@
 body {
   background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+  font-family: "Montserrat", sans-serif;
 }
 
 .container.todo {
@@ -9,7 +10,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
 }
 
 .todo__box {
@@ -22,15 +24,15 @@ body {
   border: 2px solid black;
   overflow: hidden;
 }
-
 .todo__intro {
-  height: 20%;
   background: transparent;
   position: relative;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }
-
 .todo__intro::after {
-  content: '';
+  content: "";
   background: inherit;
   bottom: -30px;
   left: 0px;
@@ -38,16 +40,49 @@ body {
   height: 30px;
   position: absolute;
 }
-
+.todo__intro-date {
+  font-size: 20px;
+  font-weight: bold;
+}
+.todo__intro-btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.todo__intro-btn {
+  border: 1px solid transparent;
+  padding: 3px 8px;
+  background: 0;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #000000;
+  border-radius: 20px;
+  transition: border-color 0.3s;
+}
+.todo__intro-btn.active {
+  background-color: #7996a5;
+  color: #fff;
+}
+.todo__intro-btn:focus, .todo__intro-btn:hover {
+  outline: none;
+  border: 1px solid #7996a5;
+  border-radius: 20px;
+}
 .todo__list {
   height: 100%;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
 }
-
+.todo__list.active-mode .checked {
+  display: none;
+}
+.todo__list.completed-mode .todo__item:not(.checked) {
+  display: none;
+}
 .todo__list-mask {
-  height: 73%;
+  height: 84%;
   width: calc(100% + 4px);
   margin-left: -2px;
   padding-top: 20px;
@@ -55,7 +90,6 @@ body {
   border: 2px solid black;
   border-radius: 30px 30px 0px 0px;
 }
-
 .todo__item {
   display: flex;
   justify-content: space-between;
@@ -64,34 +98,27 @@ body {
   padding: 10px 20px;
   background-color: rgba(0, 0, 0, 0.05);
 }
-
 .todo__item.checked {
   text-decoration: line-through;
 }
-
 .todo__item:first-child {
   border-radius: 30px 30px 0px 0px;
 }
-
 .todo__item:nth-child(odd) {
   background-color: transparent;
 }
-
 .todo__task {
   font-size: 20px;
   padding: 5px 0;
 }
-
 .todo__checkbox {
   width: 25px;
   height: 25px;
   margin-right: 5px;
 }
-
 .todo__checkbox:hover {
   cursor: pointer;
 }
-
 .todo__delete, .todo__edit {
   background: url("../img/delete.png") no-repeat;
   width: 26px;
@@ -101,21 +128,17 @@ body {
   cursor: pointer;
   transition: backgorund-color 0.3s;
 }
-
 .todo__delete:hover, .todo__edit:hover {
   background-color: #c8c8c8;
 }
-
 .todo__edit {
   background-image: url("../img/edit.png");
 }
-
 .todo__input-box {
   height: 60px;
   display: flex;
   align-items: center;
 }
-
 .todo__input-text {
   width: 100%;
   font-size: 20px;
@@ -125,12 +148,10 @@ body {
   border-radius: 10px;
   border: 1px solid black;
 }
-
 .todo__input-text:focus {
   outline: none;
   border: 2px solid #a48a8a;
 }
-
 .todo__input-btn {
   width: 80px;
   height: 40px;
@@ -138,23 +159,19 @@ body {
   border-radius: 10px;
   border: 1px solid black;
 }
-
 .todo__input-btn:focus {
   outline: none;
 }
-
 .todo__btns-holder {
   margin-left: auto;
   display: flex;
 }
-
 .todo__date {
   position: absolute;
   bottom: 0px;
   left: 50px;
   font-size: 12px;
 }
-
 .todo .task-editing {
   border: 2px dotted black;
 }
