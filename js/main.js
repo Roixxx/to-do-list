@@ -5,6 +5,7 @@ const inputText = document.querySelector(".todo__input-text");
 const todoList = document.querySelector(".todo__list");
 const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
 //const checkbox = document.querySelector('.todo__checkbox');
+
 let tasksListField = document.querySelector(".todo__list");
 
 
@@ -159,6 +160,7 @@ function saveEditedTask(isTrueKey) {
     if (!isTrueKey) return;
 
     let editedTaskId = tasksListField.querySelector('.task-editing').dataset.taskid;
+    currentTab = document.querySelector('.todo__intro-btn.active');
    
     tasksList.forEach(task => {
         if (task.taskId == editedTaskId)  {
@@ -194,7 +196,4 @@ function validateTaskAdding(isTrueKey) {
 addTaskBtn.onclick = () => validateTaskAdding(true);
     
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
-
-
-
 
