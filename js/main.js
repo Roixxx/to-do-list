@@ -1,10 +1,18 @@
+const todoBox = document.querySelector('.todo__box');
+const intro = document.querySelector('.todo__intro');
+const listMask = document.querySelector('.todo__list-mask');
+const inputBox = document.querySelector('.todo__input-box');
+
+
 const tasksLeft = document.querySelector('.todo__tasks-left');
 const introDate = document.querySelector(".todo__intro-date");
+
 const addTaskBtn = document.querySelector(".todo__input-btn");
 const inputText = document.querySelector(".todo__input-text");
+
 const todoList = document.querySelector(".todo__list");
 const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
-//const checkbox = document.querySelector('.todo__checkbox');
+
 
 let tasksListField = document.querySelector(".todo__list");
 
@@ -18,6 +26,7 @@ if (localStorage.getItem('tasks')) {
     loadTasks();
     generateDate();
     calcTasksLeft();
+    calcListMaskHeight();
     new SimpleBar(document.querySelector('.todo__list'));
     tasksListField = document.querySelector(".simplebar-content");
 } 
@@ -191,9 +200,15 @@ function validateTaskAdding(isTrueKey) {
     containerScroll.scrollTo({ top: scrollHeight, behavior: "smooth" });
 }
 
+function calcListMaskHeight() {
+   listMask.style.height = todoBox.clientHeight - intro.clientHeight - inputBox.clientHeight + 'px';
+   console.log('res')
+}
+
 
 
 addTaskBtn.onclick = () => validateTaskAdding(true);
     
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
 
+window.onresize = calcListMaskHeight;
