@@ -23,6 +23,7 @@ body {
   border-radius: 30px;
   border: 2px solid black;
   overflow: hidden;
+  background-color: ghostwhite;
 }
 .todo__intro {
   background: transparent;
@@ -85,35 +86,39 @@ body {
   height: 84%;
   width: calc(100% + 4px);
   margin-left: -2px;
-  padding-top: 20px;
+  padding-top: 26px;
   padding-bottom: 20px;
   border: 2px solid black;
   border-radius: 30px 30px 0px 0px;
 }
 .todo__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
   padding: 10px 20px;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: transparent;
+  border-top: 1px solid #d7dbe8;
 }
 .todo__item.checked {
   text-decoration: line-through;
 }
 .todo__item:first-child {
   border-radius: 30px 30px 0px 0px;
+  border-top: none;
 }
-.todo__item:nth-child(odd) {
-  background-color: transparent;
+.todo__item:hover .todo__btns-holder {
+  opacity: 1;
 }
 .todo__task {
   font-size: 20px;
   padding: 5px 0;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 .todo__checkbox {
-  width: 25px;
-  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
   margin-right: 5px;
 }
 .todo__checkbox:hover {
@@ -126,13 +131,15 @@ body {
   border: none;
   background-size: cover;
   cursor: pointer;
-  transition: backgorund-color 0.3s;
+  border-radius: 20px;
 }
 .todo__delete:hover, .todo__edit:hover {
   background-color: #c8c8c8;
 }
 .todo__edit {
   background-image: url("../img/edit.png");
+  margin-right: 5px;
+  border-radius: 0px;
 }
 .todo__input-box {
   height: 60px;
@@ -163,14 +170,24 @@ body {
   outline: none;
 }
 .todo__btns-holder {
-  margin-left: auto;
+  position: absolute;
   display: flex;
+  align-items: center;
+  background-color: rgba(248, 248, 255, 0.8);
+  z-index: 100;
+  transition: opacity 0.3s, background-color 0.3s;
+  padding-left: 15px;
+  padding-right: 15px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  opacity: 0;
 }
 .todo__date {
   position: absolute;
   bottom: 0px;
   left: 50px;
-  font-size: 12px;
+  font-size: 11px;
 }
 .todo .task-editing {
   border: 2px dotted black;

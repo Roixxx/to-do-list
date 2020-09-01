@@ -26,6 +26,7 @@ body {
         border: 2px solid black; 
         overflow: hidden;
 
+        background-color: rgba(248, 248, 255, 1);
     }
 
     &__intro {      
@@ -99,7 +100,7 @@ body {
         width: calc(100% + 4px);
         margin-left: -2px;
 
-        padding-top: 20px;
+        padding-top: 26px;
         padding-bottom: 20px;
 
        
@@ -108,12 +109,13 @@ body {
     }
 
     &__item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         position: relative;
+        display: flex;
+        justify-content: left;
+        align-items: center;
         padding: 10px 20px;
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: transparent;
+        border-top: 1px solid #d7dbe8;
 
         &.checked {
             text-decoration: line-through;
@@ -122,20 +124,23 @@ body {
 
     &__item:first-child {
         border-radius: 30px 30px 0px 0px;
+        border-top: none;
     }
 
-    &__item:nth-child(odd) {
-        background-color: transparent;
+    &__item:hover .todo__btns-holder {
+        opacity: 1;
     }
 
     &__task {
         font-size: 20px;
         padding: 5px 0;
+            word-wrap: break-word;
+        word-break: break-all;
     }
 
     &__checkbox {
-        width: 25px;
-        height: 25px;
+        min-width: 25px;
+        min-height: 25px;
         margin-right: 5px;
         
         &:hover {
@@ -151,8 +156,7 @@ body {
         border: none;
         background-size: cover;
         cursor: pointer;
-        //border-radius: 50%;
-        transition: backgorund-color 0.3s;
+        border-radius: 20px;
 
         &:hover {
             background-color: #c8c8c8;
@@ -161,6 +165,8 @@ body {
 
     &__edit {
         background-image: url('../img/edit.png');
+        margin-right: 5px;
+        border-radius: 0px;
     }
 
     &__input-box {
@@ -197,15 +203,27 @@ body {
     }
 
     &__btns-holder {
-        margin-left: auto;
+        position: absolute;
         display: flex;
+        align-items: center;
+        background-color: rgba(248, 248, 255, 0.8);
+        z-index: 100;
+        
+        transition: opacity 0.3s, background-color 0.3s;
+
+        padding-left: 15px;
+        padding-right: 15px;
+        right: 0;
+        top: 0;
+        height: 100%;
+        opacity: 0;
     }
 
     &__date {
         position: absolute;
         bottom: 0px;
         left: 50px;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .task-editing {
