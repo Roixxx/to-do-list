@@ -1,5 +1,7 @@
 const todoBox = document.querySelector('.todo__box');
 const intro = document.querySelector('.todo__intro');
+const introInfo = document.querySelector('.todo__intro-info');
+const introTitle = document.querySelector('.todo__intro-title');
 const listMask = document.querySelector('.todo__list-mask');
 const inputBox = document.querySelector('.todo__input-box');
 
@@ -8,6 +10,7 @@ const introDate = document.querySelector('.todo__intro-date');
 
 const addTaskBtn = document.querySelector('.todo__input-btn');
 const inputText = document.querySelector('.todo__input-text');
+const inputWarning = document.querySelector('.todo__input-warning');
 
 const todoList = document.querySelector('.todo__list');
 const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
@@ -19,6 +22,8 @@ let tasksList = [];
 
 
 window.onload = () => {
+
+    runIntroAnimation();
     generateDate();
     calcListMaskHeight();
     new SimpleBar(todoList);
@@ -146,7 +151,7 @@ function delTask(target) {
 function editTask(target) {
     tasksListField.addEventListener('click', (e) => {
         e.stopPropagation();
-        editingWarning('Save your changes first');
+        editingWarning();
         inputText.focus();
     }, true);
 
@@ -202,8 +207,31 @@ function calcListMaskHeight() {
    listMask.style.height = todoBox.clientHeight - intro.clientHeight - inputBox.clientHeight + 'px';
 }
 
-function editingWarning(message) {
-    console.log(message)
+function editingWarning() {
+    inputText.classList.add('wobble-hor-bottom');
+    inputWarning.style.display = 'block';
+
+    setTimeout(()=>  inputText.classList.remove('wobble-hor-bottom'), 500);
+    setTimeout(()=>  inputWarning.style.display = 'none', 4500);
+}
+
+function runIntroAnimation () {
+
+    introTitle.classList.add('fade-in');
+
+
+    setTimeout(() => {
+        introTitle.classList.remove('fade-in');
+        introTitle.classList.add('fade-out');
+    }, 5000);
+
+    setTimeout( () => {
+        intro.children.forEach( el => {
+            if (el != introTitle) {
+                el.classList.add('fade-in');
+            }
+        });
+    }, 6000);
 }
 
 
