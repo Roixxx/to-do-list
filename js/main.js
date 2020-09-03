@@ -4,30 +4,32 @@ const listMask = document.querySelector('.todo__list-mask');
 const inputBox = document.querySelector('.todo__input-box');
 
 const tasksLeft = document.querySelector('.todo__tasks-left');
-const introDate = document.querySelector(".todo__intro-date");
+const introDate = document.querySelector('.todo__intro-date');
 
-const addTaskBtn = document.querySelector(".todo__input-btn");
-const inputText = document.querySelector(".todo__input-text");
+const addTaskBtn = document.querySelector('.todo__input-btn');
+const inputText = document.querySelector('.todo__input-text');
 
-const todoList = document.querySelector(".todo__list");
+const todoList = document.querySelector('.todo__list');
 const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
 
-let tasksListField = document.querySelector(".todo__list");
+let tasksListField;
+let containerScroll;
 let tasksList = [];
 
 
-if (localStorage.getItem('tasks')) {
 
-    loadTasks(); //загружаю таски в DOM дерево
-    generateDate(); // пишу дату
-    calcTasksLeft();   // вычилсяю сколько отслось тасков
-    calcListMaskHeight(); // вычисляю высоту листа
+window.onload = () => {
+    generateDate();
+    calcListMaskHeight();
     new SimpleBar(todoList);
     tasksListField = document.querySelector(".simplebar-content");
-} 
-const simpleBar = new SimpleBar(todoList);
-const containerScroll = document.querySelector('.simplebar-content-wrapper'); 
+    containerScroll = document.querySelector('.simplebar-content-wrapper'); 
 
+    if (localStorage.getItem('tasks')) {
+        loadTasks();
+        calcTasksLeft();   
+    }
+}
 
 function parseTasks() { 
     let tasksArrFromStorage = JSON.parse(localStorage.getItem('tasks'));
@@ -42,7 +44,6 @@ function loadTasks() {
 }
 
 function generateTask() { 
-
     let task = {
         todo: inputText.value,
         date: generateDate(),
@@ -145,14 +146,14 @@ function delTask(target) {
 function editTask(target) {
     tasksListField.addEventListener('click', (e) => {
         e.stopPropagation();
-        alert('Save your changes first');
+        editingWarning('Save your changes first');
         inputText.focus();
     }, true);
 
     target = target.parentNode.parentNode;
     target.classList.add('task-editing');
     
-    addTaskBtn.value = 'save';
+    addTaskBtn.style.backgroundImage = "url('../img/save.svg')";
     addTaskBtn.setAttribute('onclick', 'saveEditedTask(true)');
 
     inputText.value = target.querySelector('.todo__task').textContent;
@@ -201,10 +202,13 @@ function calcListMaskHeight() {
    listMask.style.height = todoBox.clientHeight - intro.clientHeight - inputBox.clientHeight + 'px';
 }
 
+function editingWarning(message) {
+    console.log(message)
+}
+
+
 
 
 addTaskBtn.onclick = () => validateTaskAdding(true);
-    
 inputText.onkeypress = (e) => validateTaskAdding(e.key == 'Enter');
-
 window.onresize = calcListMaskHeight;

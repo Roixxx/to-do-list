@@ -99,11 +99,8 @@ body {
 
     &__list-mask {
         height: 100%; 
-
         padding-top: 26px;
-
         box-shadow: 0px -8px 11px 0px rgba(50, 50, 50, 0.2);
-
         border-radius: 30px 30px 0px 0px;
     }
 
@@ -177,9 +174,11 @@ body {
     }
 
     &__input-box {
-        height: 60px;
+        padding: 0 20px;
+        height: 80px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -190,7 +189,7 @@ body {
         width: 100%;
         font-size: 20px;
         height: 40px;
-        margin: 0 20px;
+        margin-right: 20px;
         padding: 5px;
         border-radius: 10px;
         border: 0px solid black;
@@ -204,10 +203,11 @@ body {
     }
 
     &__input-btn {
-        width: 46px;
-        height: 38px;
+        min-width: 40px;
+        min-height: 40px;
         background: url('../img/plus.svg') no-repeat;
-        margin-right: 20px;
+        background-size: cover;
+       
         border-radius: 50%;
         border: 0px solid black;
         transition: background-color 0.3s, box-shadow 0.3s;
@@ -249,7 +249,7 @@ body {
     }
 
     .task-editing {
-        border: 2px dotted black;
+        background-color: #a07f7f66;
     }
 }
 
@@ -270,5 +270,13 @@ body {
     
     .todo__item {
         padding: 10px;
+    }
+
+    .todo__input-box {
+        padding: 0 10px;
+    }
+
+    .todo__input-text {
+        margin-right: 15px;
     }
 }
