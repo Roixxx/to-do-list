@@ -3,7 +3,6 @@ const intro = document.querySelector('.todo__intro');
 const listMask = document.querySelector('.todo__list-mask');
 const inputBox = document.querySelector('.todo__input-box');
 
-
 const tasksLeft = document.querySelector('.todo__tasks-left');
 const introDate = document.querySelector(".todo__intro-date");
 
@@ -13,29 +12,27 @@ const inputText = document.querySelector(".todo__input-text");
 const todoList = document.querySelector(".todo__list");
 const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
 
-
 let tasksListField = document.querySelector(".todo__list");
-
-
-
-
 let tasksList = [];
 
+
 if (localStorage.getItem('tasks')) {
-    tasksList = parseTasks();
-    loadTasks();
-    generateDate();
-    calcTasksLeft();
-    calcListMaskHeight();
-    new SimpleBar(document.querySelector('.todo__list'));
+
+    loadTasks(); //загружаю таски в DOM дерево
+    generateDate(); // пишу дату
+    calcTasksLeft();   // вычилсяю сколько отслось тасков
+    calcListMaskHeight(); // вычисляю высоту листа
+    new SimpleBar(todoList);
     tasksListField = document.querySelector(".simplebar-content");
 } 
-const simpleBar = new SimpleBar(document.querySelector('.todo__list'));
+const simpleBar = new SimpleBar(todoList);
 const containerScroll = document.querySelector('.simplebar-content-wrapper'); 
 
 
 function parseTasks() { 
-    return JSON.parse(localStorage.getItem('tasks'));
+    let tasksArrFromStorage = JSON.parse(localStorage.getItem('tasks'));
+    tasksList = tasksArrFromStorage;
+    return tasksArrFromStorage;
 }
 
 function loadTasks() {
@@ -202,7 +199,6 @@ function validateTaskAdding(isTrueKey) {
 
 function calcListMaskHeight() {
    listMask.style.height = todoBox.clientHeight - intro.clientHeight - inputBox.clientHeight + 'px';
-   console.log('res')
 }
 
 
