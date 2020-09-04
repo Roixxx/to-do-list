@@ -3,6 +3,7 @@ const intro = document.querySelector('.todo__intro');
 const introInfo = document.querySelector('.todo__intro-info');
 const introTitle = document.querySelector('.todo__intro-title');
 const listMask = document.querySelector('.todo__list-mask');
+const noTask = document.querySelector('.todo__no-task');
 const inputBox = document.querySelector('.todo__input-box');
 
 const tasksLeft = document.querySelector('.todo__tasks-left');
@@ -23,7 +24,7 @@ let tasksList = [];
 
 window.onload = () => {
 
-    runIntroAnimation();
+    runIntroAnimationOneTime();
     generateDate();
     calcListMaskHeight();
     new SimpleBar(todoList);
@@ -69,6 +70,12 @@ function calcTasksLeft() {
     let left = 0;
     tasksList.forEach( t => !t.checked ? left++ : null );
     tasksLeft.textContent = left;
+
+    if (left == 0) {
+        noTask.style.display = 'block';
+    } else {
+        noTask.style.display = 'none';
+    }
 }
 
 function generateDate() { 
@@ -215,10 +222,24 @@ function editingWarning() {
     setTimeout(()=>  inputWarning.style.display = 'none', 4500);
 }
 
-function runIntroAnimation () {
+function runIntroAnimationOneTime () {
 
-    introTitle.classList.add('fade-in');
+    if (sessionStorage.getItem('introAnimationRan')) {
+    
+        intro.children.forEach( el => {
+            if (el != introTitle) {
+                el.style.display = 'flex';
+                el.classList.add('fade-in');
+            }
+        });
+        return;  
+    }
 
+    sessionStorage.setItem('introAnimationRan', 'true');
+   
+    setTimeout(() => {
+        introTitle.classList.add('fade-in');
+    }, 1000);
 
     setTimeout(() => {
         introTitle.classList.remove('fade-in');
@@ -228,6 +249,7 @@ function runIntroAnimation () {
     setTimeout( () => {
         intro.children.forEach( el => {
             if (el != introTitle) {
+                el.style.display = 'flex';
                 el.classList.add('fade-in');
             }
         });
