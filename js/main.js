@@ -1,20 +1,20 @@
 const todoBox = document.querySelector('.todo__box');
-const intro = document.querySelector('.todo__intro');
-const introInfo = document.querySelector('.todo__intro-info');
-const introTitle = document.querySelector('.todo__intro-title');
-const listMask = document.querySelector('.todo__list-mask');
-const noTask = document.querySelector('.todo__no-task');
-const inputBox = document.querySelector('.todo__input-box');
+const intro = todoBox.querySelector('.todo__intro');
+const introInfo = todoBox.querySelector('.todo__intro-info');
+const introTitle = todoBox.querySelector('.todo__intro-title');
+const listMask = todoBox.querySelector('.todo__list-mask');
+const noTask = todoBox.querySelector('.todo__no-task');
+const inputBox = todoBox.querySelector('.todo__input-box');
 
-const tasksLeft = document.querySelector('.todo__tasks-left');
-const introDate = document.querySelector('.todo__intro-date');
+const tasksLeft = todoBox.querySelector('.todo__tasks-left');
+const introDate = todoBox.querySelector('.todo__intro-date');
 
-const addTaskBtn = document.querySelector('.todo__input-btn');
-const inputText = document.querySelector('.todo__input-text');
-const inputWarning = document.querySelector('.todo__input-warning');
+const addTaskBtn = todoBox.querySelector('.todo__input-btn');
+const inputText = todoBox.querySelector('.todo__input-text');
+const inputWarning = todoBox.querySelector('.todo__input-warning');
 
-const todoList = document.querySelector('.todo__list');
-const introBtns = Array.from(document.querySelectorAll('.todo__intro-btn'));
+const todoList = todoBox.querySelector('.todo__list');
+const introBtns = Array.from(todoBox.querySelectorAll('.todo__intro-btn'));
 
 let tasksListField;
 let containerScroll;
@@ -28,8 +28,8 @@ window.onload = () => {
     generateDate();
     calcListMaskHeight();
     new SimpleBar(todoList);
-    tasksListField = document.querySelector(".simplebar-content");
-    containerScroll = document.querySelector('.simplebar-content-wrapper'); 
+    tasksListField = todoBox.querySelector(".simplebar-content");
+    containerScroll = todoBox.querySelector('.simplebar-content-wrapper'); 
 
     if (localStorage.getItem('tasks')) {
         loadTasks();
@@ -63,7 +63,6 @@ function generateTask() {
 
     let lastTask = tasksList[tasksList.length - 1];
     generateHtmlTask(lastTask);
-
 }
 
 function calcTasksLeft() {
@@ -165,7 +164,7 @@ function editTask(target) {
     target = target.parentNode.parentNode;
     target.classList.add('task-editing');
     
-    addTaskBtn.style.backgroundImage = "url('../img/save.svg')";
+    addTaskBtn.style.backgroundImage = "url('./img/save.svg')";
     addTaskBtn.setAttribute('onclick', 'saveEditedTask(true)');
 
     inputText.value = target.querySelector('.todo__task').textContent;
@@ -179,7 +178,7 @@ function saveEditedTask(isTrueKey) {
     if (!isTrueKey) return;
 
     let editedTaskId = tasksListField.querySelector('.task-editing').dataset.taskid;
-    currentTab = document.querySelector('.todo__intro-btn.active');
+    currentTab = todoBox.querySelector('.todo__intro-btn.active');
    
     tasksList.forEach(task => {
         if (task.taskId == editedTaskId)  {
@@ -224,14 +223,17 @@ function editingWarning() {
 
 function runIntroAnimationOneTime () {
 
-    if (sessionStorage.getItem('introAnimationRan')) {
-    
+    const introFadeIn = () => {
         intro.children.forEach( el => {
             if (el != introTitle) {
                 el.style.display = 'flex';
                 el.classList.add('fade-in');
             }
         });
+    }
+
+    if (sessionStorage.getItem('introAnimationRan')) {
+        introFadeIn();
         return;  
     }
 
@@ -246,17 +248,8 @@ function runIntroAnimationOneTime () {
         introTitle.classList.add('fade-out');
     }, 5000);
 
-    setTimeout( () => {
-        intro.children.forEach( el => {
-            if (el != introTitle) {
-                el.style.display = 'flex';
-                el.classList.add('fade-in');
-            }
-        });
-    }, 6000);
+    setTimeout(introFadeIn, 6000);
 }
-
-
 
 
 addTaskBtn.onclick = () => validateTaskAdding(true);
