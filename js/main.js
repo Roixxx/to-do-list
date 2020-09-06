@@ -27,6 +27,7 @@ window.onload = () => {
     runIntroAnimationOneTime();
     generateDate();
     calcListMaskHeight();
+    calcTasksLeft();
     new SimpleBar(todoList);
     tasksListField = todoBox.querySelector(".simplebar-content");
     containerScroll = todoBox.querySelector('.simplebar-content-wrapper'); 
